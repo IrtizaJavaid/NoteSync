@@ -1,1 +1,5 @@
-# NoteSync
+<<<<<<< HEAD
+Your local changes...
+=======
+Changes from GitHub...
+>>>>>>> FETCH_HEAD

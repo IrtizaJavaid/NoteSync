@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-8">
+      <!-- Header -->
+      <h1 class="text-4xl font-bold text-center mb-6 text-blue-400">
+        NoteSync
+      </h1>
+
+      <!-- Create Task Form -->
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+        <form action="/notes" method="POST">
+          <input
+            type="text"
+            name="title"
+            placeholder=" Title"
+            class="w-full p-3 rounded-md bg-gray-700 text-white outline-none mb-3"
+          />
+          <textarea
+            name="Details"
+            placeholder="Note Details"
+            class="w-full p-3 rounded-md bg-gray-700 text-white outline-none mb-3 h-24"
+          ></textarea>
+          <button
+            type="submit"
+            class="w-full bg-blue-500 hover:bg-blue-600 transition px-4 py-2 rounded-md text-lg font-semibold"
+          >
+            🚀 Add Notes
+          </button>
+        </form>
+      </div>
+
+      <!-- Task List -->
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <% if (files.length > 0) { %> <% files.forEach(function (val) { %>
+        <div
+          class="bg-gray-800 p-6 rounded-lg shadow-md flex flex-col justify-between"
+        >
+          <h2 class="text-2xl font-semibold text-center">
+            <%= val.charAt(0).toUpperCase() + val.slice(1) %>
+          </h2>
+
+          <div class="flex justify-between items-center mt-4">
+            <a
+              href="/notes/<%= encodeURIComponent(val) %>"
+              class="text-blue-400 hover:underline"
+              >Read More</a
+            >
+            <a href="/edit/<%= val %>" class="text-yellow-400 hover:underline"
+              >Edit</a
+            >
+
+            <!-- DELETE Request via Method Override -->
+            <form
+              action="/notes/<%= encodeURIComponent(val) %>?_method=DELETE"
+              method="POST"
+            >
+              <button
+                class="bg-red-600 text-white px-3 py-1 rounded-md"
+                type="submit"
+              >
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+        <% }); %> <% } else { %>
+        <p class="text-center text-gray-400 text-lg">No tasks added yet.</p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

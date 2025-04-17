@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Note</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-8">
+      <a href="/notes" class="text-blue-500 inline-block mb-5"
+        >← Back to Notes</a>
+      <h1 class="text-3xl font-bold mb-5">Edit Note</h1>
+
+      <form action="/notes/<%= filename %>?_method=PUT" method="POST">
+        <label class="text-lg">New Filename:</label>
+        <input
+          type="text"
+          name="newFilename"
+          value="<%= filename.replace('.txt', '') %>"
+          class="w-full p-3 bg-gray-700 text-white rounded-md mb-3"
+        />
+
+        <label class="text-lg">Edit Task Details:</label>
+        <textarea
+          name="newContent"
+          class="w-full p-3 bg-gray-700 text-white rounded-md h-24"
+        >
+<%= filedata %></textarea
+        >
+
+        <button
+          type="submit"
+          class="mt-4 bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md font-semibold"
+        >
+          Update Note
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
